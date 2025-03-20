@@ -1,0 +1,19 @@
+extends ../../layouts/default.pug
+include ../../mixins/box-head.pug
+block main
+
+  .container.my-3
+    .row
+      .col-12
+        +box-head("Thông tin tài khoản")
+      
+        if(user.fullname)
+          p Họ tên: <b>#{user.fullname}</b>
+        if(user.email)
+          p Email: <b>#{user.email}</b>
+        p 
+          span Trạng Thái: 
+          span 
+            <b>#{user.status==="active"?"Hoạt Động":"Dừng Hoạt Động"}</b>
+        //- a(href=`${prefixAdmin}/my-account/edit/`  class="btn btn-primary") Chỉnh Sửa Thông Tin
+      

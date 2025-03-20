@@ -1,0 +1,46 @@
+extends ../../layout/default.pug
+include ../../mixin/table-tree.pug
+block main
+  if(role.permissions.includes("products-categogy_view"))
+    h1 Danh Mục Sản Phẩm
+    .card.mb-3 
+      .card-header Danh Sách
+      .card-body
+        .row 
+          .col-8
+          .col-4
+            if(role.permissions.includes("products-categogy_create"))
+              a(
+                href=`${prefixAdmin}/products-categogy/create`
+                class="btn btn-outline-success"
+              ) + Thêm Mới
+          table(
+              class="table table-hover table-sm"
+              checkbox-multi
+            )
+              thead 
+                tr 
+                  th
+                    input(type="checkbox" name="checkall")
+                  th STT 
+                  th Hình Ảnh
+                  th Tiêu Đề
+                  th Vị Trí
+                  th Trạng Thái
+                  th Hành Động
+              
+              tbody
+                +table-tree(records)
+
+        //- form(
+        //-   action=""
+        //-   method="POST"
+        //-   id="form-change-status"
+        //-   data-path=`${prefixAdmin}/products/change-status`
+        //- )
+        //- form(
+        //-   action=""
+        //-   method="POST"
+        //-   id="form-delete-id"
+        //-   data-path=`${prefixAdmin}/products/delete`
+        //- )

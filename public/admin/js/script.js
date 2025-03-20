@@ -157,5 +157,37 @@ if(uploadImage){
 }
 
 //END Upload Image Preview
+// sort
+    const sort=document.querySelector("[sort]");
+    if(sort){
+        let url =new URL(window.location.href);
+        const sortSelect=sort.querySelector("[sort-select]");
+        const sortClear=sort.querySelector("[sort-clear]");
+        //sắp xếp
+        sortSelect.addEventListener("change",(e)=>{
+            const value=e.target.value;
+            const [sortkey,sortValue]=value.split("-");
+            url.searchParams.set("sortkey",sortkey);
+            url.searchParams.set("sortValue",sortValue);
+
+            window.location.href=url.href;
+        })
+        // xoá sắp xếp
+        sortClear.addEventListener("click",()=>{
+            url.searchParams.delete("sortkey");
+            url.searchParams.delete("sortValue");
+
+            window.location.href=url.href;
+        })
+        //thêm selected cho option
+         const sortkey = url.searchParams.get("sortkey");
+         const sortValue =   url.searchParams.get("sortValue");
+         if(sortkey && sortValue){
+            const stringSort = `${sortkey}-${sortValue}`;
+            const optionSelected=sortSelect.querySelector(`option[value='${stringSort}']`);
+            optionSelected.selected=true;
+         }
+    }
+// END sort
 
 
